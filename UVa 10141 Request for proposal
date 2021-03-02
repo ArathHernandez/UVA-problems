@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_map>
 #include <string>
 
 using namespace std;
@@ -8,47 +7,46 @@ int main()
 {
     int n, p;
     int a = 1;
+    bool flag = true;
     
     while(cin >> n >> p){
         if(n==0&&p==0) break;
-        unordered_map<string,int>req;
         string bestM;
         float lowestP = 0;
         int bestR = 0;
+        cin.ignore();
         for(int i = 0; i < n; i++){
-            string aux; cin.getline(aux);
-            req[aux] = 1;
+            string aux; getline(cin,aux);
         }
         
+        if(!flag) cout << endl;
+        else flag = false;
+        
         for(int j = 0; j < p; j++){
-            cin.ignore();
             string mark; getline(cin,mark);
             float price; cin >> price;
             int tempR; cin >> tempR;
-            
-            cout << mark << " " << price << " " << tempR << endl;
-            
-            int tempA = 0;
+             cin.ignore();
             
             for(int i = 0; i < tempR; i++){
-                cin.ignore();
                 string aux; getline(cin,aux);
-                if(req[aux] == 1) tempA++;
             }
             
-            if(tempA > bestR){
+            if(tempR > bestR){
                 bestM = mark;
                 lowestP = price;
-                bestR = tempA;
+                bestR = tempR;
             }
             
-            if(tempA == bestR){
+            if(tempR == bestR){
                 if(price < lowestP){
                     bestM = mark;
                     lowestP = price;
                 }
             }
+            
         }
+        
         
         cout << "RFP #" << a << endl;
         cout << bestM << endl;
